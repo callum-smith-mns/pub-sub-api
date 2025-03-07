@@ -1,6 +1,7 @@
 package common
 
 import (
+	"os"
 	"time"
 
 	"github.com/developerforce/pub-sub-api/go/proto"
@@ -8,24 +9,24 @@ import (
 
 var (
 	// topic and subscription-related variables
-	TopicName           = "/event/CarMaintenance__e"
+	TopicName           = os.Getenv("TOPIC")
 	ReplayPreset        = proto.ReplayPreset_EARLIEST
 	ReplayId     []byte = nil
 	Appetite     int32  = 5
 
 	// gRPC server variables
-	GRPCEndpoint    = "api.pubsub.salesforce.com:7443"
+	GRPCEndpoint    = "api.pubsub.salesforce.com:" + os.Getenv("PORT")
 	GRPCDialTimeout = 5 * time.Second
 	GRPCCallTimeout = 5 * time.Second
 
 	// OAuth header variables
-	GrantType    = "password"
-	ClientId     = "<CLIENT_ID>"
-	ClientSecret = "<CLIENT_SECRET>"
-	Username     = "<ORG_USERNAME>"
-	Password     = "<ORG_PASSWORD>"
+	GrantType    = os.Getenv("GRANT_TYPE")
+	ClientId     = os.Getenv("CLIENT_ID")
+	ClientSecret = os.Getenv("CLIENT_SECRET")
+	Username     = os.Getenv("USERNAME")
+	Password     = os.Getenv("PASSWORD")
 
 	// OAuth server variables
-	OAuthEndpoint    = "<ORG_LOGIN_URL>"
+	OAuthEndpoint    = os.Getenv("LOGIN_URL")
 	OAuthDialTimeout = 5 * time.Second
 )
